@@ -1,54 +1,63 @@
-// models/Etablissement.js
 import db from '../config/db.js';
 
 const Etablissement = {
-  create: (nomEtablissement, addresse, quartier, tel, horaires, tarif, ambiance, service, callback) => {
+  create: async (nomEtablissement, addresse, quartier, tel, horaires, tarif, ambiance, service) => {
     const sql = 'INSERT INTO Etablissement (nomEtablissement, addresse, quartier, tel, horaires, tarif, ambiance, service) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
-    db.query(sql, [nomEtablissement, addresse, quartier, tel, horaires, tarif, ambiance, service], (error, results) => {
-      if (error) {
-        return callback(error, null);
-      }
-      callback(null, results);
+    return new Promise((resolve, reject) => {
+      db.query(sql, [nomEtablissement, addresse, quartier, tel, horaires, tarif, ambiance, service], (error, results) => {
+        if (error) {
+          return reject(error);
+        }
+        resolve(results);
+      });
     });
   },
 
-  findAll: (callback) => {
+  findAll: async () => {
     const sql = 'SELECT * FROM Etablissement';
-    db.query(sql, (error, results) => {
-      if (error) {
-        return callback(error, null);
-      }
-      callback(null, results);
+    return new Promise((resolve, reject) => {
+      db.query(sql, (error, results) => {
+        if (error) {
+          return reject(error);
+        }
+        resolve(results);
+      });
     });
   },
 
-  findById: (id, callback) => {
+  findById: async (id) => {
     const sql = 'SELECT * FROM Etablissement WHERE id = ?';
-    db.query(sql, [id], (error, results) => {
-      if (error) {
-        return callback(error, null);
-      }
-      callback(null, results[0]);
+    return new Promise((resolve, reject) => {
+      db.query(sql, [id], (error, results) => {
+        if (error) {
+          return reject(error);
+        }
+        resolve(results[0]);
+      });
     });
   },
 
-  update: (id, nomEtablissement, addresse, quartier, tel, horaires, tarif, ambiance, service, callback) => {
+  update: async (id, nomEtablissement, addresse, quartier, tel, horaires, tarif, ambiance, service) => {
     const sql = 'UPDATE Etablissement SET nomEtablissement = ?, addresse = ?, quartier = ?, tel = ?, horaires = ?, tarif = ?, ambiance = ?, service = ? WHERE id = ?';
-    db.query(sql, [nomEtablissement, addresse, quartier, tel, horaires, tarif, ambiance, service, id], (error, results) => {
-      if (error) {
-        return callback(error, null);
-      }
-      callback(null, results);
+    return new Promise((resolve, reject) => {
+      db.query(sql, [nomEtablissement, addresse, quartier, tel, horaires, tarif, ambiance, service, id], (error, results) => {
+        if (error) {
+          return reject(error);
+        }
+        resolve(results);
+      });
     });
   },
 
-  delete: (id, callback) => {
+  delete: async (id) => {
     const sql = 'DELETE FROM Etablissement WHERE id = ?';
-    db.query(sql, [id], (error, results) => {
-      if (error) {
-        return callback(error, null);
-      }
-      callback(null, results);
+    return new Promise((resolve, reject) => {
+      db.query(sql, [id], (error, results) => {
+        if (error) {
+          return reject(error);
+        }
+        resolve(results);
+      });
     });
   },
 };

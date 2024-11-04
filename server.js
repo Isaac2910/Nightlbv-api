@@ -1,7 +1,9 @@
 import express from 'express';
-
+import connect from './config/db.js';
 const app = express();
 const port = 3007;
+
+connect
 
 
 

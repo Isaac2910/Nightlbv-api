@@ -4,5 +4,5 @@
 npm init
 
 
-npm i express mysql nodemon 
+npm i express mysql2 nodemon 
 

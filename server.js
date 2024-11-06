@@ -30,15 +30,13 @@ app.use('/users', userRoute);
 app.use('/etablissements', etabRoute);
 
 // Gestion des routes non trouvées
-app.use((req, res, next) => {
+/*app.use((req, res, next) => {
     res.status(404).send({ message: "Route non trouvée" });
-});
+});*/
 
-// Gestion des erreurs serveur
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send({ message: "Erreur serveur" });
-});
+app.get('/', (req, res) => {
+  res.json('success')
+})
 
 // Configuration de la base de données
 const prisma = new PrismaClient();
